@@ -403,6 +403,17 @@ class TuyaBLEDevice:
                         # case 1:
                         #    raw_product_key = service_data[1:]
 
+            if not (self._advertisement_data.manufacturer_data or {}).get(
+                MANUFACTURER_DATA_ID
+            ):
+                # Some devices (e.g. the Moes BWV-YC valve) send no 0x07D0
+                # manufacturer data that reaches HA, which would leave the
+                # protocol version at the v2 default. Assume v3 instead.
+                _LOGGER.debug(
+                    "%s: no manufacturer data, assuming protocol 3", self.address
+                )
+                self._protocol_version = 3
+
             if self._advertisement_data.manufacturer_data:
                 manufacturer_data = self._advertisement_data.manufacturer_data.get(
                     MANUFACTURER_DATA_ID
