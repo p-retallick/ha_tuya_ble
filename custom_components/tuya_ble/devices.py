@@ -585,3 +585,8 @@ def get_device_info(device: TuyaBLEDevice) -> DeviceInfo | None:
     )
     return result
 
+
+
+# Moes BWV-YC valve controller (product svhikeyq): same datapoints as 0axr5s0b
+# (1 switch, 7 battery, 10 weather_delay, 11 countdown, 12 work_state).
+devices_database["sfkzq"].products["svhikeyq"] = devices_database["sfkzq"].products["0axr5s0b"]

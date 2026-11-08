@@ -373,3 +373,7 @@ async def async_setup_entry(
                 mapping,
             ))
     async_add_entities(entities)
+
+
+# Moes BWV-YC valve controller (product svhikeyq): same datapoints as 0axr5s0b.
+mapping["sfkzq"].products["svhikeyq"] = mapping["sfkzq"].products["0axr5s0b"]
