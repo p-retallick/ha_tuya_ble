@@ -76,7 +76,9 @@ async def _try_login(
         CONF_COUNTRY_CODE: country.country_code,
     }
 
-    for app_type in (TUYA_SMART_APP, SMARTLIFE_APP, ""):
+    # Try Smart Life first: an email that also has a (separate, empty) Tuya Smart
+    # account would otherwise log in there and find no devices.
+    for app_type in (SMARTLIFE_APP, TUYA_SMART_APP, ""):
         data[CONF_APP_TYPE] = app_type
         if app_type == "":
             data[CONF_AUTH_TYPE] = AuthType.CUSTOM
